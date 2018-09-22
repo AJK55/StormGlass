@@ -24,4 +24,4 @@ before_script:
   - npm lodash --version
 
 script:
-  - node_modules/.bin/newman run tests/"Storm Glass.postman_collection.json" -e tests/"Storm Glass.postman_environment.json"
+  - node_modules/.bin/newman run tests/Storm_Glass.postman_collection.json -e tests/Storm_Glass.postman_environment.json

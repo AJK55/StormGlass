@@ -18,6 +18,8 @@ before_script:
   - node --version
   - npm --version
   - newman --version
-
+  - npm lodash --version
+  - npm moment --version
+  
 script:
   - node_modules/.bin/newman run tests/StormGlass.postman_collection.json -e tests/StormGlass.postman_environment.json

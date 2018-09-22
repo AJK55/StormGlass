@@ -19,9 +19,6 @@ before_script:
   - node --version
   - npm --version
   - newman --version
-  - npm moment --version
-  - npm moment-timezone --version
-  - npm lodash --version
 
 script:
   - node_modules/.bin/newman run "tests/Storm Glass.postman_collection.json" -e "tests/Storm Glass.postman_environment.json"

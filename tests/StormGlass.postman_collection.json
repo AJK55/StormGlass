@@ -10,12 +10,12 @@
 			"name": "Valid Requests",
 			"item": [
 				{
-					"name": "Get forecast - Valid Key",
+					"name": "Get forecast - Valid Key - Default",
 					"event": [
 						{
 							"listen": "test",
 							"script": {
-								"id": "0394174e-0c63-44f9-9b1f-acd451c31bac",
+								"id": "2f93bee8-edd9-44d9-9eea-7d9ec95d1f0c",
 								"type": "text/javascript",
 								"exec": [
 									"pass = true;",
@@ -29,11 +29,25 @@
 									"//var key = data.errors.key;",
 									"var code = response.code;",
 									"var stat = response.status;",
+									"var hours = data.hours;",
+									"var meta = data.meta;",
+									"var params = meta.params;",
 									"//console.log(key)",
 									"//console.log(key === \"API key is invalid\")",
 									"//console.log(data)",
 									"console.log(environment.timestampHeader)",
-									""
+									"",
+									"if (hours.length === 241) {",
+									"    tests[\"Number of Hours = \" + hours.length] = pass;",
+									"}",
+									"else",
+									"    tests[\"Number of Hours = \" + hours.length] = fail;",
+									"",
+									"if (params.length === 23) {",
+									"    tests[\"Number of Params = \" + params.length] = pass;",
+									"}",
+									"else",
+									"    tests[\"Number of Params = \" + params.length] = fail;"
 								]
 							}
 						}
@@ -48,7 +62,7 @@
 						],
 						"body": {},
 						"url": {
-							"raw": "https://api.stormglass.io/forecast?lat=58.5&lng=17.8",
+							"raw": "https://api.stormglass.io/forecast?lat={{lat1}}&lng={{lng1}}",
 							"protocol": "https",
 							"host": [
 								"api",
@@ -61,11 +75,11 @@
 							"query": [
 								{
 									"key": "lat",
-									"value": "58.5"
+									"value": "{{lat1}}"
 								},
 								{
 									"key": "lng",
-									"value": "17.8"
+									"value": "{{lng1}}"
 								}
 							]
 						},

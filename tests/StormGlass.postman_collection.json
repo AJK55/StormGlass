@@ -15,7 +15,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "3ef5a5f9-611c-44c4-b715-1bffb0f15b73",
+								"id": "0394174e-0c63-44f9-9b1f-acd451c31bac",
 								"type": "text/javascript",
 								"exec": [
 									"pass = true;",
@@ -31,7 +31,7 @@
 									"var stat = response.status;",
 									"//console.log(key)",
 									"//console.log(key === \"API key is invalid\")",
-									"",
+									"//console.log(data)",
 									"console.log(environment.timestampHeader)",
 									""
 								]
@@ -46,10 +46,7 @@
 								"value": "{{token}}"
 							}
 						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
+						"body": {},
 						"url": {
 							"raw": "https://api.stormglass.io/forecast?lat=58.5&lng=17.8",
 							"protocol": "https",
@@ -111,12 +108,11 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "58e42943-b1fe-487b-bbd9-1867883515b6",
+								"id": "428056d4-0658-469d-a780-2250864fc3cd",
 								"type": "text/javascript",
 								"exec": [
 									"pass = true;",
 									"fail = false;",
-									"",
 									"",
 									"var data = JSON.parse(responseBody);",
 									"var response = pm.response",
@@ -125,9 +121,11 @@
 									"var key = data.errors.key;",
 									"var code = response.code;",
 									"var stat = response.status;",
+									"var headerACAO = header['Access-Control-Allow-Origin'];",
+									"var headerCL = header['Content-Length'];",
+									"var headerCT = header['Content-Type'];",
 									"//console.log(key)",
-									"//console.log(key === \"API key is invalid\")",
-									"",
+									"//console.log(headerCT)",
 									"console.log(environment.timestampHeader)",
 									"",
 									"if (key === \"API key is invalid\") {",
@@ -148,7 +146,25 @@
 									"    tests[\"Status = \" + stat] = pass;",
 									"}",
 									"else",
-									"    tests[\"Status = \" + stat] = fail;"
+									"    tests[\"Status = \" + stat] = fail;",
+									"",
+									"if (headerACAO === '*') {",
+									"    tests[\"Access-Control-Allow-Origin = \" + headerACAO ] = pass;",
+									"}",
+									"else",
+									"    tests[\"Access-Control-Allow-Origin = \" + headerACAO ] = fail;",
+									"",
+									"if (headerCL === \"40\") {",
+									"    tests[\"Content-Length = \" + headerCL] = pass;",
+									"}",
+									"else",
+									"    tests[\"Content-Length = \" + headerCL] = fail;",
+									"    ",
+									"if (headerCT === \"application/json\") {",
+									"    tests[\"Content-Type = \" + headerCT] = pass;",
+									"}",
+									"else",
+									"    tests[\"Content-Type = \" + headerCT] = fail;"
 								]
 							}
 						},
@@ -171,10 +187,7 @@
 								"value": "{YOUR API TOKEN}"
 							}
 						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
+						"body": {},
 						"url": {
 							"raw": "https://api.stormglass.io/forecast?lat=58.5&lng=17.8",
 							"protocol": "https",

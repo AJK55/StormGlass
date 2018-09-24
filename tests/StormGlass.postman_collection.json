@@ -15,7 +15,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "6abc0b3b-8054-4072-afa8-7ffea194e96a",
+								"id": "f93df6b0-97fb-49b8-9b35-6a558615c440",
 								"type": "text/javascript",
 								"exec": [
 									"pass = true;",
@@ -48,10 +48,10 @@
 									"console.log(environment.timestampHeader)",
 									"",
 									"if (startDate === start) {",
-									"    tests[\"Startdate = start\"] = pass;",
+									"    tests[startDate + \" = \" + start] = pass;",
 									"}",
 									"else",
-									"    tests[\"Startdate = start\"] = fail;",
+									"    tests[startDate + \" = \" + start] = fail;",
 									"",
 									"if (headerKeys.length === 7) {",
 									"    tests[\"Number of Header Objects = \" + headerKeys.length] = pass;",

@@ -15,7 +15,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "0eaaceea-15c8-4d50-8eb2-3ecc6dec8e73",
+								"id": "49372094-e2a8-4810-884b-0cac32e4b1a2",
 								"type": "text/javascript",
 								"exec": [
 									"pass = true;",
@@ -41,7 +41,6 @@
 									"var start = meta.start;",
 									"var lat = meta.lat;",
 									"var lng = meta.lng;",
-									"",
 									"",
 									"console.log(environment.timestampHeader)",
 									"",
@@ -143,6 +142,81 @@
 						"description": "Send a longitude/latitude coordinate and receive a response containing weather data from multiple weather sources for that coordinate."
 					},
 					"response": []
+				},
+				{
+					"name": "Get forecast - Valid Key - Default - Params",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "0a1f5223-2e8e-455b-a5ed-bd6f3da186de",
+								"type": "text/javascript",
+								"exec": [
+									"pass = true;",
+									"fail = false;",
+									"",
+									"var moment = require('moment');",
+									"var data = JSON.parse(responseBody);",
+									"var response = pm.response;",
+									"var meta = data.meta;",
+									"var cookie = responseCookies;",
+									"var header = responseHeaders;",
+									"var requestCount = data.meta.requestCount;",
+									"var dailyQuota = data.meta.dailyQuota;",
+									"var rCode = response.code;",
+									"",
+									"//console.log(response)",
+									"",
+									"if (requestCount < dailyQuota && rCode === 200) {",
+									"    tests[requestCount + \" is Less Than \" + dailyQuota] = pass;",
+									"}",
+									"else if (requestCount > dailyQuota && rCode === 429) {",
+									"    tests[requestCount + \" is Greater Than \" + dailyQuota] = pass;",
+									"}",
+									"else",
+									"    tests[\"Request Count vs Quota\"] = fail;",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authentication-Token",
+								"value": "{{token}}"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "https://api.stormglass.io/forecast?lat={{lat1}}&lng={{lng1}}&params=precipitation,gust,windSpeed",
+							"protocol": "https",
+							"host": [
+								"api",
+								"stormglass",
+								"io"
+							],
+							"path": [
+								"forecast"
+							],
+							"query": [
+								{
+									"key": "lat",
+									"value": "{{lat1}}"
+								},
+								{
+									"key": "lng",
+									"value": "{{lng1}}"
+								},
+								{
+									"key": "params",
+									"value": "precipitation,gust,windSpeed"
+								}
+							]
+						}
+					},
+					"response": []
 				}
 			],
 			"event": [
@@ -162,9 +236,7 @@
 						"id": "1823069a-9c05-4201-9d22-4f4b3df061f6",
 						"type": "text/javascript",
 						"exec": [
-							"pm.test(\"Status code is 200\", function () {",
-							"    pm.response.to.have.status(200);",
-							"});"
+							""
 						]
 					}
 				}

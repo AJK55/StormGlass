@@ -155,7 +155,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "0a1f5223-2e8e-455b-a5ed-bd6f3da186de",
+								"id": "070df03d-aa11-4953-a37d-f1bfc515043b",
 								"type": "text/javascript",
 								"exec": [
 									"pass = true;",
@@ -170,6 +170,11 @@
 									"var requestCount = data.meta.requestCount;",
 									"var dailyQuota = data.meta.dailyQuota;",
 									"var rCode = response.code;",
+									"var meta = data.meta;",
+									"var params = meta.params;",
+									"var param1 = environment.param1;",
+									"var param2 = environment.param2;",
+									"//console.log(params)",
 									"",
 									"//console.log(response)",
 									"",
@@ -181,7 +186,54 @@
 									"}",
 									"else",
 									"    tests[\"Request Count vs Quota\"] = fail;",
+									"",
+									"if ((params[0] === param1 || param2) && (params[1] === param1 || param2)) {",
+									"    tests[\"Params are Correct\"] = pass;",
+									"}",
+									"else",
+									"    tests[\"Params are InCorrect\"] = fail;",
+									"    ",
 									""
+								]
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "99a4e920-28c9-4e9d-89bf-cf6c30d84a94",
+								"type": "text/javascript",
+								"exec": [
+									"var _ = require('lodash')",
+									"var params = [",
+									"            \"waterTemperature\",",
+									"            \"wavePeriod\",",
+									"            \"waveDirection\",",
+									"            \"waveDirection\",",
+									"            \"waveHeight\",",
+									"            \"windWaveDirection\",",
+									"            \"windWaveHeight\",",
+									"            \"windWavePeriod\",",
+									"            \"swellPeriod\",",
+									"            \"swellDirection\",",
+									"            \"swellHeight\",",
+									"            \"windSpeed\",",
+									"            \"windDirection\",",
+									"            \"airTemperature\",",
+									"            \"precipitation\",",
+									"            \"gust\",",
+									"            \"cloudCover\",",
+									"            \"humidity\",",
+									"            \"pressure\",",
+									"            \"visibility\",",
+									"            \"seaLevel\",",
+									"            \"currentSpeed\",",
+									"            \"currentDirection\"",
+									"        ]",
+									"var param1 = (params[_.random(23)]);",
+									"var param2 = (params[_.random(23)]);",
+									"",
+									"pm.environment.set(\"param1\", param1);",
+									"pm.environment.set(\"param2\", param2);"
 								]
 							}
 						}
@@ -196,7 +248,7 @@
 						],
 						"body": {},
 						"url": {
-							"raw": "https://api.stormglass.io/forecast?lat={{lat1}}&lng={{lng1}}&params=precipitation,gust,windSpeed",
+							"raw": "https://api.stormglass.io/forecast?lat={{lat1}}&lng={{lng1}}&params={{param1}},{{param2}}",
 							"protocol": "https",
 							"host": [
 								"api",
@@ -217,7 +269,7 @@
 								},
 								{
 									"key": "params",
-									"value": "precipitation,gust,windSpeed"
+									"value": "{{param1}},{{param2}}"
 								}
 							]
 						}

@@ -208,9 +208,13 @@
 						{
 							"listen": "prerequest",
 							"script": {
-								"id": "d29c5a51-b9e4-4fd3-bc28-a382f8b47e33",
+								"id": "8f851fd1-a074-4a7a-85f2-f0b38fcc3da4",
 								"type": "text/javascript",
 								"exec": [
+									"pm.environment.unset(\"param1\");",
+									"pm.environment.unset(\"param2\");",
+									"",
+									"",
 									"var _ = require('lodash')",
 									"var params = [",
 									"  \"waterTemperature\"",
@@ -292,7 +296,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "a9e6568b-9d27-4df5-898b-480cf20492c9",
+								"id": "3223b809-3a95-4192-9671-4abf16205cff",
 								"type": "text/javascript",
 								"exec": [
 									"pass = true;",
@@ -334,6 +338,8 @@
 									"else",
 									"    tests[\"Params are InCorrect\"] = fail;",
 									"    ",
+									"    ",
+									"    ",
 									""
 								]
 							}
@@ -341,9 +347,13 @@
 						{
 							"listen": "prerequest",
 							"script": {
-								"id": "d29c5a51-b9e4-4fd3-bc28-a382f8b47e33",
+								"id": "13fb7d42-fa5e-487d-9746-8c32048ebaae",
 								"type": "text/javascript",
 								"exec": [
+									"pm.environment.unset(\"param1\");",
+									"pm.environment.unset(\"param2\");",
+									"",
+									"",
 									"var _ = require('lodash')",
 									"var params = [",
 									"  \"waterTemperature\"",
@@ -376,7 +386,11 @@
 									"var param2 = (params[_.random(25)]);",
 									"",
 									"pm.environment.set(\"param1\", param1);",
-									"pm.environment.set(\"param2\", param2);"
+									"pm.environment.set(\"param2\", param2);",
+									"",
+									"",
+									"",
+									"pm.environment.unset(\"variable_key\");"
 								]
 							}
 						}
@@ -576,7 +590,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "951f717d-e169-4d52-a00d-b1623aa94a48",
+						"id": "1cadd418-0b26-475a-9a79-0ec023ea11b1",
 						"type": "text/javascript",
 						"exec": [
 							"var _ = require('lodash')",
@@ -590,6 +604,11 @@
 							"//console.log(coordinates)",
 							"//console.log(coordinates[0])",
 							"//console.log(coordinates[1])",
+							"",
+							"pm.environment.unset(\"lat\");",
+							"pm.environment.unset(\"lng\");",
+							"",
+							"",
 							"",
 							"pm.environment.set(\"lat\", coordinates[0]);",
 							"pm.environment.set(\"lng\", coordinates[1]);",

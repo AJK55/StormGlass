@@ -15,7 +15,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "9daebaeb-6f22-490b-ad92-f754449262c4",
+								"id": "f6f85617-2137-4d4d-86a3-eb6d64e3bd3e",
 								"type": "text/javascript",
 								"exec": [
 									"pass = true;",
@@ -47,16 +47,20 @@
 									"",
 									"console.log(environment.timestampHeader)",
 									"",
+									"tests[\"Status code should be 200\"] = rCode === 200;",
+									"if (rCode !== 200) return;",
+									"// continue with other tests",
+									"",
 									"if (lat == environment.lat1 && lng == environment.lng1) {",
 									"    tests[\"Latitude and Longitude\"] = pass;",
 									"}",
 									"else",
 									"    tests[\"Latitude and Longitude\"] = fail;",
 									"    ",
-									"if (requestCount < dailyQuota && rCode === 200) {",
+									"if (requestCount <= dailyQuota && rCode === 200) {",
 									"    tests[requestCount + \" is Less Than \" + dailyQuota] = pass;",
 									"}",
-									"else if (requestCount > dailyQuota && rCode === 429) {",
+									"else if (requestCount > dailyQuota && rCode === 402) {",
 									"    tests[requestCount + \" is Greater Than \" + dailyQuota] = pass;",
 									"}",
 									"else",
@@ -155,7 +159,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "070df03d-aa11-4953-a37d-f1bfc515043b",
+								"id": "a9e6568b-9d27-4df5-898b-480cf20492c9",
 								"type": "text/javascript",
 								"exec": [
 									"pass = true;",
@@ -178,7 +182,11 @@
 									"",
 									"//console.log(response)",
 									"",
-									"if (requestCount < dailyQuota && rCode === 200) {",
+									"tests[\"Status code should be 200\"] = rCode === 200;",
+									"if (rCode !== 200) return;",
+									"// continue with other tests",
+									"",
+									"if (requestCount <= dailyQuota && rCode === 200) {",
 									"    tests[requestCount + \" is Less Than \" + dailyQuota] = pass;",
 									"}",
 									"else if (requestCount > dailyQuota && rCode === 429) {",
